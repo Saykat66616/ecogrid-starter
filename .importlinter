@@ -1,0 +1,39 @@
+; Fitness function M1: bounded contexts and layers, enforced on every pull request.
+; Run with:  PYTHONPATH=services:libs lint-imports
+[importlinter]
+root_packages =
+    metering
+    marketplace
+    settlement
+
+[importlinter:contract:contexts-are-independent]
+name = Bounded contexts do not import each other
+type = independence
+modules =
+    metering
+    marketplace
+    settlement
+
+[importlinter:contract:metering-layers]
+name = Metering dependencies point inwards
+type = layers
+layers =
+    metering.adapters
+    metering.application
+    metering.domain
+
+[importlinter:contract:marketplace-layers]
+name = Marketplace dependencies point inwards
+type = layers
+layers =
+    marketplace.adapters
+    marketplace.application
+    marketplace.domain
+
+[importlinter:contract:settlement-layers]
+name = Settlement dependencies point inwards
+type = layers
+layers =
+    settlement.adapters
+    settlement.application
+    settlement.domain

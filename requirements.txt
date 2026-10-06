@@ -1,0 +1,4 @@
+# Runtime dependencies (the domain and application layers need none of these).
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.7
