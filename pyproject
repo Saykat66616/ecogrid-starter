@@ -1,0 +1,40 @@
+[project]
+name = "ecogrid"
+version = "0.1.0"
+description = "EcoGrid Energy: peer-to-peer renewable energy trading platform (architecture starter)"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+pythonpath = [".", "services", "libs"]
+testpaths = ["services", "tests"]
+addopts = "--import-mode=importlib -q"
+markers = ["fitness: architectural fitness functions (see docs/fitness-functions.md)"]
+
+[tool.coverage.run]
+source = ["services", "libs"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["services", "libs", "."]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "C90", "S"]
+ignore = ["S101"]  # assert is how pytest works
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10  # fitness function M2
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "services:libs"
+explicit_package_bases = true
+namespace_packages = true
+files = ["services", "libs", "composition"]
+exclude = ["/tests/"]
